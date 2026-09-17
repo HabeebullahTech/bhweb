@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+  HayMedics Hospital — installable app (PWA) wrapper
+  ==================================================
+  HOW TO USE
+  1) In Apps Script: Deploy > Manage deployments > copy your Web app /exec link.
+  2) Paste it below where it says PASTE_YOUR_EXEC_URL_HERE (one place, the APP_URL line).
+  3) Upload this whole "Hospital PWA" folder to GitHub Pages or your own domain (as the site root).
+     (index.html, manifest.json, service-worker.js and all the icon .png files must sit together.)
+  4) Open the page on a phone:
+       Android (Chrome): tap the "Install app" button, or menu > Install app.
+       iPhone/iPad (Safari): tap Share > Add to Home Screen.
+  It then opens full-screen with your logo, like a native app.
+  NOTE: if you re-deploy a new version in Apps Script and the /exec link changes,
+        update the APP_URL line below and re-upload this index.html.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>HayMedics Hospital</title>
+<meta name="description" content="HayMedics Hospital — EMR + Laboratory system.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1E3E7B">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HayMedics Hospital">
+<style>
+  :root{--navy:#1E3E7B;--gold:#F4A522}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;width:100%;overflow:hidden;background:var(--navy);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  #app{position:fixed;inset:0;border:0;width:100%;height:100%;display:block;background:#fff}
+  /* Splash */
+  #splash{position:fixed;inset:0;z-index:10;background:radial-gradient(120% 90% at 20% 10%,#2B579E,#1E3E7B 55%,#0C1A38);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;transition:opacity .4s ease}
+  #splash.hide{opacity:0;pointer-events:none}
+  #splash .logo{width:96px;height:96px;background:#fff;border-radius:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(0,0,0,.35)}
+  #splash h1{font-weight:800;font-size:1.5rem;margin-top:18px;letter-spacing:.3px}
+  #splash p{color:#9FB6DE;font-size:.9rem;margin-top:4px}
+  #splash .bar{margin-top:22px;width:150px;height:5px;border-radius:5px;background:rgba(255,255,255,.2);overflow:hidden}
+  #splash .bar i{display:block;height:100%;width:40%;background:var(--gold);border-radius:5px;animation:load 1.1s infinite ease-in-out}
+  @keyframes load{0%{margin-left:-40%}100%{margin-left:100%}}
+  /* Install button */
+  #install{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:20;display:none;align-items:center;gap:8px;background:var(--gold);color:#0C1A38;border:none;border-radius:999px;padding:13px 22px;font-weight:800;font-size:.95rem;box-shadow:0 8px 22px rgba(0,0,0,.3);cursor:pointer}
+  #ios{position:fixed;left:16px;right:16px;bottom:20px;z-index:20;display:none;background:rgba(255,255,255,.96);color:#12203c;border-radius:14px;padding:14px 16px;font-size:.9rem;box-shadow:0 10px 30px rgba(0,0,0,.3);text-align:center}
+  #ios b{color:var(--navy)}
+</style>
+</head>
+<body>
+  <div id="splash">
+    <span class="logo">
+      <svg width="60" height="60" viewBox="0 0 100 100"><path d="M6 44 Q50 10 50 10 Q50 10 94 44 Q50 30 50 30 Q50 30 6 44 Z" fill="#F4A522"/><rect x="20" y="50" width="13" height="40" fill="#1E3E7B"/><rect x="44" y="50" width="13" height="40" fill="#1E3E7B"/><rect x="67" y="50" width="13" height="40" fill="#1E3E7B"/><rect x="20" y="50" width="60" height="11" fill="#1E3E7B"/></svg>
+    </span>
+    <h1>HayMedics Hospital</h1>
+    <p>EMR + Laboratory</p>
+    <div class="bar"><i></i></div>
+  </div>
+
+  <iframe id="app" title="HayMedics Hospital" allow="clipboard-write; camera; microphone" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  <button id="install"><span>⬇️</span> Install app</button>
+  <div id="ios">📲 To install: tap <b>Share</b>, then <b>Add to Home Screen</b>.</div>
+
+<script>
+  /* ====== 1) YOUR APP LINK — replace with your current Apps Script /exec URL ====== */
+  var APP_URL = "https://script.google.com/macros/s/AKfycbzikQIUDT1G1q39tdbgKPnKDwXepS0veYisgnfIDBjJC12V1gLEoGmyY1flT5ZoLftjRA/exec"; // PASTE_YOUR_EXEC_URL_HERE
+
+  var frame = document.getElementById('app');
+  var splash = document.getElementById('splash');
+  frame.src = APP_URL;
+  frame.addEventListener('load', function(){ setTimeout(function(){ splash.classList.add('hide'); }, 400); });
+  setTimeout(function(){ splash.classList.add('hide'); }, 6000); // safety: hide splash even if load event is missed
+
+  /* ====== 2) Service worker (makes it installable) ====== */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('service-worker.js').catch(function(){}); });
+  }
+
+  /* ====== 3) Android install button ====== */
+  var deferred = null;
+  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferred = e; document.getElementById('install').style.display = 'inline-flex'; });
+  document.getElementById('install').addEventListener('click', function(){ if(!deferred) return; deferred.prompt(); deferred.userChoice.finally(function(){ deferred = null; document.getElementById('install').style.display='none'; }); });
+  window.addEventListener('appinstalled', function(){ document.getElementById('install').style.display='none'; });
+
+  /* ====== 4) iPhone hint (Safari has no install button) ====== */
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  if (isIOS && !standalone) { setTimeout(function(){ document.getElementById('ios').style.display='block'; setTimeout(function(){ var el=document.getElementById('ios'); if(el) el.style.display='none'; }, 8000); }, 1500); }
+</script>
+</body>
+</html>

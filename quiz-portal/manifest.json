@@ -1,7 +1,7 @@
 {
-  "name": "HayMedics Hospital",
-  "short_name": "HayMedics",
-  "description": "Hospital EMR + Laboratory system by HayMedics Academy.",
+  "name": "BaytulHub Quiz and Assessment",
+  "short_name": "BH - Assessment",
+  "description": "BaytulHub Online Academy + Quiz and Assessment App by BaytulHub Tech.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

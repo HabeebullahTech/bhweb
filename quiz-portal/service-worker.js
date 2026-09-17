@@ -1,5 +1,5 @@
 /* BaytulHub Academy — service worker (enables install + caches the app shell) */
-const CACHE = 'BaytulHub Academy-v1';
+const CACHE = 'BaytulHub Academy-v2';
 const SHELL = [
   './',
   './index.html',
@@ -26,4 +26,8 @@ self.addEventListener('fetch', function (e) {
   if (url.origin === location.origin) {
     e.respondWith(caches.match(e.request).then(function (r) { return r || fetch(e.request); }));
   }
+});
+
+
+
 });

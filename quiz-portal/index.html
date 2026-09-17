@@ -35,7 +35,8 @@
   /* Splash */
   #splash{position:fixed;inset:0;z-index:10;background:radial-gradient(120% 90% at 20% 10%,#2B579E,#1E3E7B 55%,#0C1A38);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;transition:opacity .4s ease}
   #splash.hide{opacity:0;pointer-events:none}
-  #splash .logo{width:96px;height:96px;background:#fff;border-radius:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(0,0,0,.35)}
+  #splash .logo{width:96px;height:96px;background:#fff;border-radius:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(0,0,0,.35);overflow:hidden}
+  #splash .logo img{width:74px;height:74px;object-fit:contain;display:block}
   #splash h1{font-weight:800;font-size:1.5rem;margin-top:18px;letter-spacing:.3px}
   #splash p{color:#9FB6DE;font-size:.9rem;margin-top:4px}
   #splash .bar{margin-top:22px;width:150px;height:5px;border-radius:5px;background:rgba(255,255,255,.2);overflow:hidden}
@@ -50,8 +51,8 @@
 <body>
   <div id="splash">
       <span class="logo">
-   <svg width="60" height="60" viewBox="0 0 100 100"><path d="M6 44 Q50 10 50 10 Q50 10 94 44 Q50 30 50 30 Q50 30 6 44 Z" fill="#F4A522"/><rect x="20" y="50" width="13" height="40" fill="#1E3E7B"/><rect x="44" y="50" width="13" height="40" fill="#1E3E7B"/><rect x="67" y="50" width="13" height="40" fill="#1E3E7B"/><rect x="20" y="50" width="60" height="11" fill="#1E3E7B"/></svg>
-    </span>
+        <img src="icon-192.png" alt="BaytulHub">
+      </span>
     <h1>BaytulHub Assessment Portal</h1>
     <p>Quiz and Assessment Application</p>
     <div class="bar"><i></i></div>

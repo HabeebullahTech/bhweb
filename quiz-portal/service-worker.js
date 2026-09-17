@@ -1,5 +1,5 @@
-/* HayMedics Hospital — service worker (enables install + caches the app shell) */
-const CACHE = 'haymedics-hospital-v1';
+/* BaytulHub Academy — service worker (enables install + caches the app shell) */
+const CACHE = 'BaytulHub Academy-v1';
 const SHELL = [
   './',
   './index.html',

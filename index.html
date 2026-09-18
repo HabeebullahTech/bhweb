@@ -105,8 +105,23 @@
   .menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
   .menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
   .menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+  
+  /* #mobile-menu{display:none; position:fixed; inset:0 0 0 0; top:73px; background:var(--white); z-index:99; overflow-y:auto; padding:10px var(--gutter) 40px; border-top:1px solid var(--line);} */
 
-  #mobile-menu{display:none; position:fixed; inset:0 0 0 0; top:73px; background:var(--white); z-index:99; overflow-y:auto; padding:10px var(--gutter) 40px; border-top:1px solid var(--line);}
+#mobile-menu{
+  display:none;
+  position:absolute;         /* was: fixed */
+  top:100%;                  /* was: top:73px combined with inset:0 */
+  left:0;
+  right:0;
+  background:var(--white);
+  z-index:99;
+  max-height:calc(100dvh - 90px); /* safety cap so it never runs off-screen */
+  overflow-y:auto;
+  padding:10px var(--gutter) 40px;
+  border-top:1px solid var(--line);
+}
+  
   #mobile-menu.open{display:block;}
   .m-item{border-bottom:1px solid var(--line);}
   .m-row{display:flex; align-items:center; justify-content:space-between;}
@@ -166,7 +181,20 @@
   .slider-progress .bar{height:100%; width:0%; background:var(--green);}
   .slider-progress .bar.animate{animation:growWidth 6.5s linear forwards;}
   @keyframes growWidth{ from{width:0%;} to{width:100%;} }
+
   @media (max-width: 900px){
+    .slide-row{grid-template-columns:1fr; text-align:center; height:auto; padding-top:52px; padding-bottom:104px;}
+    .slide-row > div:first-child{padding-left:0;}
+    .slide-row > div:first-child::before{display:none;}
+    .slide-row h2{margin-left:auto; margin-right:auto;}   /* ADD THIS LINE */
+    .slide-row p{margin-left:auto; margin-right:auto;}
+    .slide-ctas{justify-content:center;}
+    .visual-card{max-width:200px; margin:0 auto;}
+    .slider-arrow{display:none;}
+    .slides{height:660px;}
+}
+  
+  /* @media (max-width: 900px){
     .slide-row{grid-template-columns:1fr; text-align:center; height:auto; padding-top:52px; padding-bottom:104px;}
     .slide-row > div:first-child{padding-left:0;}
     .slide-row > div:first-child::before{display:none;}
@@ -175,7 +203,7 @@
     .visual-card{max-width:200px; margin:0 auto;}
     .slider-arrow{display:none;}
     .slides{height:660px;}
-  }
+  } */
 
   /* ---------- Sections generic ---------- */
   section{padding:76px 0;}

@@ -129,7 +129,7 @@
   .ac-meta{list-style:none; margin:0 0 20px; padding:0; display:grid; gap:8px;}
   .ac-meta li{display:flex; align-items:flex-start; gap:8px; font-size:0.85rem; color:var(--muted);}
   .ac-meta li svg{flex-shrink:0; margin-top:2px;}
-  .ac-body .btn{align-self:flex-start; margin-top:auto;}
+  .ac-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:auto;}
 
   .status-badge{display:inline-flex; align-items:center; gap:6px; font-size:0.72rem; font-weight:700; padding:4px 12px; border-radius:999px;}
   .status-open{background:#e6f4e1; color:var(--olive);}
@@ -214,7 +214,9 @@
            4. The description paragraph and the .ac-meta list
            5. The Apply button: use the anchor with class btn btn-primary and a real href
               while the application is open, or the disabled span with class
-              btn btn-disabled while it is closed. -->
+              btn btn-disabled while it is closed.
+           6. The Learn More button stays the same for every card, pointing to
+              https://baytulhub.com/Acad-Team-Emp, unless a role needs its own page. -->
     <div class="apps-grid">
 
       <!-- Preparatory Class Application -->
@@ -240,10 +242,15 @@
               Open to children and adults
             </li>
           </ul>
-          <a class="btn btn-primary" href="https://script.google.com/macros/s/AKfycbxGkcLSV8umEZ3qssHVXiMAtBe35h-VMxN3xsJmt0Kd0eYIbW3wG3mfnUaDR77ISqnT/exec" target="_blank" rel="noopener">
-            Apply Now
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-          </a>
+          <div class="ac-actions">
+            <a class="btn btn-primary btn-sm" href="https://script.google.com/macros/s/AKfycbxGkcLSV8umEZ3qssHVXiMAtBe35h-VMxN3xsJmt0Kd0eYIbW3wG3mfnUaDR77ISqnT/exec" target="_blank" rel="noopener">
+              Apply Now
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -270,10 +277,15 @@
               Open to children and adults
             </li>
           </ul>
-          <span class="btn btn-disabled" aria-disabled="true">
-            Applications Closed
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
-          </span>
+          <div class="ac-actions">
+            <span class="btn btn-disabled btn-sm" aria-disabled="true">
+              Applications Closed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+            </span>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -300,10 +312,15 @@
               Best for active hifz students
             </li>
           </ul>
-          <span class="btn btn-disabled" aria-disabled="true">
-            Applications Closed
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
-          </span>
+          <div class="ac-actions">
+            <span class="btn btn-disabled btn-sm" aria-disabled="true">
+              Applications Closed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+            </span>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -330,10 +347,15 @@
               Best for busy schedules
             </li>
           </ul>
-          <span class="btn btn-disabled" aria-disabled="true">
-            Applications Closed
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
-          </span>
+          <div class="ac-actions">
+            <span class="btn btn-disabled btn-sm" aria-disabled="true">
+              Applications Closed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+            </span>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -360,10 +382,15 @@
               Flexible scheduling
             </li>
           </ul>
-          <span class="btn btn-disabled" aria-disabled="true">
-            Applications Closed
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
-          </span>
+          <div class="ac-actions">
+            <span class="btn btn-disabled btn-sm" aria-disabled="true">
+              Applications Closed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+            </span>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -390,10 +417,15 @@
               Open to students in any programme
             </li>
           </ul>
-          <span class="btn btn-disabled" aria-disabled="true">
-            Applications Closed
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
-          </span>
+          <div class="ac-actions">
+            <span class="btn btn-disabled btn-sm" aria-disabled="true">
+              Applications Closed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+            </span>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -420,10 +452,15 @@
               Open to teachers, counsellors and digital collaborators
             </li>
           </ul>
-          <a class="btn btn-primary" href="https://script.google.com/macros/s/AKfycbzEOXu8UxJlNjK8q1pFjaRiPL-Ma-QOb3rkfTxr0p56OClhaveUwyAivsCTWbz6HxLMFQ/exec" target="_blank" rel="noopener">
-            Apply Now
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-          </a>
+          <div class="ac-actions">
+            <a class="btn btn-primary btn-sm" href="https://script.google.com/macros/s/AKfycbzEOXu8UxJlNjK8q1pFjaRiPL-Ma-QOb3rkfTxr0p56OClhaveUwyAivsCTWbz6HxLMFQ/exec" target="_blank" rel="noopener">
+              Apply Now
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -450,10 +487,15 @@
               Sessions handled with privacy and respect
             </li>
           </ul>
-          <span class="btn btn-disabled" aria-disabled="true">
-            Applications Closed
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
-          </span>
+          <div class="ac-actions">
+            <span class="btn btn-disabled btn-sm" aria-disabled="true">
+              Applications Closed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+            </span>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -480,10 +522,15 @@
               Open to current and prospective students
             </li>
           </ul>
-          <a class="btn btn-primary" href="https://script.google.com/macros/s/AKfycbxfOBf1iU1iiyq_2joSWNCpIEoKgXgEPJ8PiM77AtQTkfn24W6JYCS1RVePz_FmSZUhfw/exec" target="_blank" rel="noopener">
-            Apply Now
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-          </a>
+          <div class="ac-actions">
+            <a class="btn btn-primary btn-sm" href="https://script.google.com/macros/s/AKfycbxfOBf1iU1iiyq_2joSWNCpIEoKgXgEPJ8PiM77AtQTkfn24W6JYCS1RVePz_FmSZUhfw/exec" target="_blank" rel="noopener">
+              Apply Now
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -510,10 +557,15 @@
               Flexible sponsorship options
             </li>
           </ul>
-          <span class="btn btn-disabled" aria-disabled="true">
-            Applications Closed
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
-          </span>
+          <div class="ac-actions">
+            <span class="btn btn-disabled btn-sm" aria-disabled="true">
+              Applications Closed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+            </span>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 
@@ -536,10 +588,15 @@
               Read carefully before submitting
             </li>
           </ul>
-          <a class="btn btn-primary" href="https://script.google.com/macros/s/AKfycbyx3YMRVYDkiLOmkPxoDWMcGmuGzqClEyAVBi1IbxOSSFnIGpaw64HWHedMfhT7MR3S/exec" target="_blank" rel="noopener">
-            Apply Now
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-          </a>
+          <div class="ac-actions">
+            <a class="btn btn-primary btn-sm" href="https://script.google.com/macros/s/AKfycbyx3YMRVYDkiLOmkPxoDWMcGmuGzqClEyAVBi1IbxOSSFnIGpaw64HWHedMfhT7MR3S/exec" target="_blank" rel="noopener">
+              Apply Now
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+            <a class="btn btn-outline btn-sm" href="https://baytulhub.com/Acad-Team-Emp" target="_blank" rel="noopener">
+              Learn More
+            </a>
+          </div>
         </div>
       </div>
 

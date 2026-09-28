@@ -1,93 +1,247 @@
 <!DOCTYPE html>
-<!--
-  BaytulHub Assessment Portal — wrapper
-  ==================================================
-  HOW TO USE
-  1) In Apps Script: Deploy > Manage deployments > copy your Web app /exec link.
-  2) Paste it below where it says PASTE_YOUR_EXEC_URL_HERE (one place, the APP_URL line).
-  3) Upload this whole "Assessment Portal PWA" folder to GitHub Pages or your own domain (as the site root).
-     (index.html, manifest.json, service-worker.js and all the icon .png files must sit together.)
-  4) Open the page on a phone:
-       Android (Chrome): tap the "Install app" button, or menu > Install app.
-       iPhone/iPad (Safari): tap Share > Add to Home Screen.
-  It then opens full-screen with your logo, like a native app.
-  NOTE: if you re-deploy a new version in Apps Script and the /exec link changes,
-        update the APP_URL line below and re-upload this index.html.
--->
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<title>BaytulHub Assessment Portal</title>
-<meta name="description" content="BaytulHub Assessment  — Portal.">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2B0A4A">
-<link rel="icon" href="favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="BaytulHub Assessment Portal">
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WAEC, NECO &amp; JAMB Tutoring 2027 and 2028 | BaytulHub Online Academy</title>
+<meta name="description" content="One-on-one and small-group online tutoring for SS1 to SS3 students. Pure Science, Maths &amp; English, JAMB CBT and Oral English.">
+<link rel="icon" href="data:image/webp;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--pink:#F31573;--purple:#2B0A4A;--white:#FFFFFF}
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;width:100%;overflow:hidden;background:var(--purple);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-  #app{position:fixed;inset:0;border:0;width:100%;height:100%;display:block;background:#fff}
-  /* Splash */
-  #splash{position:fixed;inset:0;z-index:10;background:radial-gradient(120% 90% at 20% 10%,var(--pink),var(--purple) 55%,#160530);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;transition:opacity .4s ease}
-  #splash.hide{opacity:0;pointer-events:none}
-  #splash .logo{width:96px;height:96px;background:#fff;border-radius:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(0,0,0,.35);overflow:hidden}
-  #splash .logo img{width:74px;height:74px;object-fit:contain;display:block}
-  #splash h1{font-weight:800;font-size:1.5rem;margin-top:18px;letter-spacing:.3px}
-  #splash p{color:rgba(255,255,255,.75);font-size:.9rem;margin-top:4px}
-  #splash .bar{margin-top:22px;width:150px;height:5px;border-radius:5px;background:rgba(255,255,255,.2);overflow:hidden}
-  #splash .bar i{display:block;height:100%;width:40%;background:var(--pink);border-radius:5px;animation:load 1.1s infinite ease-in-out}
-  @keyframes load{0%{margin-left:-40%}100%{margin-left:100%}}
-  /* Install button */
-  #install{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:20;display:none;align-items:center;gap:8px;background:var(--pink);color:var(--white);border:none;border-radius:999px;padding:13px 22px;font-weight:800;font-size:.95rem;box-shadow:0 8px 22px rgba(0,0,0,.3);cursor:pointer}
-  #ios{position:fixed;left:16px;right:16px;bottom:20px;z-index:20;display:none;background:rgba(255,255,255,.96);color:var(--purple);border-radius:14px;padding:14px 16px;font-size:.9rem;box-shadow:0 10px 30px rgba(0,0,0,.3);text-align:center}
-  #ios b{color:var(--pink)}
-</style>
-</head>
-<body>
-  <div id="splash">
-      <span class="logo">
-        <img src="icon-192.png" alt="BaytulHub">
-      </span>
-    <h1>BaytulHub Assessment Portal</h1>
-    <p>Quiz and Assessment Application</p>
-    <div class="bar"><i></i></div>
-  </div>
+:root{--navy:#20033C;--green:#6AB547;--pink:#F31573;--white:#fff;--tint:#F8F5FB;--ink:#2B0A4A;--line:#E4DCEC}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{font:400 1.05rem/1.6 Poppins,system-ui,sans-serif;color:var(--ink);background:#fff;overflow-x:hidden}
+h1,h2,h3{font-family:Poppins,sans-serif;line-height:1.1;color:var(--navy)}
+h1,h2{font-family:Poppins;font-weight:900}
+h1{font-size:clamp(2.2rem,6.4vw,4.2rem)}h2{font-size:clamp(1.7rem,4vw,2.5rem);margin-bottom:.6rem}h3{font-weight:800;font-size:1.2rem}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}section{padding:72px 0}.alt{background:var(--tint)}
+p.lead{max-width:62ch;font-size:1.15rem}.mut{opacity:.75}
+.btn{display:inline-block;border:0;cursor:pointer;font:800 1rem Poppins,sans-serif;padding:15px 26px;border-radius:10px;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}.btn:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.pink{background:var(--pink);color:#fff;box-shadow:0 8px 20px rgba(243,21,115,.3)}.ghost{border:2px solid var(--navy);color:var(--navy);background:transparent}
+#cd{position:sticky;top:0;z-index:30;background:var(--pink);color:#fff;text-align:center;font:800 .95rem Poppins;padding:9px 12px}
+#cd b{font-family:Poppins;letter-spacing:.04em;background:var(--navy);padding:2px 9px;border-radius:6px;margin:0 4px}
+nav{position:sticky;top:38px;z-index:29;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+nav img{height:42px}nav a.l{color:var(--navy);text-decoration:none;font:600 .9rem Poppins;margin-left:18px}
+@media(max-width:720px){nav a.l{display:none}}
+.hero{background:var(--navy);color:#fff;padding:80px 0 64px;position:relative;overflow:hidden}
+.hero h1{color:#fff;max-width:15ch}.hero p{max-width:56ch;margin:20px 0 28px;font-size:1.2rem;opacity:.92}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}.hero .ghost{border-color:#fff;color:#fff}
+.hero:after{content:"";position:absolute;right:-90px;top:-70px;width:380px;height:380px;background:var(--pink);border-radius:50%;opacity:.16;animation:pulse 5s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.stat{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px;border-top:1px solid rgba(255,255,255,.2);padding-top:22px}
+.stat div{max-width:250px;font-size:.95rem}.stat strong{display:block;font:900 2.4rem Poppins;color:var(--green)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:28px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.pain li{margin:10px 0 10px 20px}
+.tog{display:inline-flex;background:#fff;border:2px solid var(--navy);border-radius:999px;overflow:hidden;margin:6px 8px 6px 0}
+.tog button{border:0;background:none;padding:8px 18px;font:800 .9rem Poppins;cursor:pointer;color:var(--navy)}.tog .on{background:var(--navy);color:#fff}
+.course{display:flex;flex-direction:column;gap:10px}.course .price{font:900 1.9rem Poppins;color:var(--navy)}
+.course .hr{color:var(--green);font-weight:600;font-size:.9rem}.course ul{padding-left:18px;font-size:.95rem}.course .btn{margin-top:auto;text-align:center}
+.tiers{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:24px}
+.tier{border:2px solid var(--line);border-radius:14px;padding:24px;background:#fff}.tier.best{border-color:var(--green);box-shadow:0 10px 30px rgba(106,181,71,.2)}
+.tier li{list-style:none;padding:5px 0 5px 26px;position:relative}.tier li:before,.chk li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+.chk{padding:0}.chk li{list-style:none;padding:7px 0 7px 26px;position:relative}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:0 18px}
+summary{cursor:pointer;font:800 1.05rem Poppins;padding:16px 0;color:var(--navy)}details[open]{border-color:var(--green)}details p,details ul{padding:0 0 16px 18px}
+.bonus{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:24px}.bonus .card{border-left:6px solid var(--green)}
+.fin{background:var(--navy);color:#fff;text-align:center}.fin h2{color:#fff}.fin p{margin:0 auto 24px;max-width:52ch}
+footer{background:#160228;color:#cfc3dc;padding:36px 0;font-size:.9rem}footer a{color:#fff}
+#wa{position:fixed;right:18px;bottom:18px;z-index:40;background:#25D366;color:#fff;border-radius:999px;padding:13px 20px;font:800 .95rem Poppins;text-decoration:none;box-shadow:0 8px 22px rgba(0,0,0,.25)}
+#ov{position:fixed;inset:0;background:rgba(32,3,60,.72);z-index:50;display:none;overflow:auto;padding:16px}#ov.on{display:block}
+#box{background:#fff;max-width:560px;margin:20px auto;border-radius:16px;padding:26px;position:relative;animation:up .25s}@keyframes up{from{transform:translateY(20px);opacity:0}}
+#box label{display:block;font:600 .85rem Poppins;margin:12px 0 4px}#box input,#box select{width:100%;padding:11px;border:1.5px solid var(--line);border-radius:8px;font:inherit}
+.x{position:absolute;right:14px;top:10px;background:none;border:0;font-size:1.8rem;cursor:pointer}
+.bank{background:var(--tint);border-left:6px solid var(--pink);border-radius:8px;padding:14px;margin:14px 0;font-size:.95rem}.bank div{display:flex;justify-content:space-between;gap:12px;padding:2px 0}.bank b{text-align:right}
+.tot{font:900 1.5rem Poppins;color:var(--navy)}#msg{margin-top:12px;font-weight:600}
+.rv{opacity:0;transform:translateY(16px);transition:.6s}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 
-  <iframe id="app" title="BaytulHub Assessment Portal" allow="clipboard-write; camera; microphone" referrerpolicy="no-referrer-when-downgrade"></iframe>
+/* professional polish */
+body{font-size:1rem;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Poppins,sans-serif;letter-spacing:-.02em}
+h1{font-weight:800;font-size:clamp(2rem,5vw,3.4rem);line-height:1.15;max-width:20ch}
+h2{font-weight:800;font-size:clamp(1.5rem,3.4vw,2.15rem);line-height:1.2;margin-bottom:14px}
+h2:after{content:"";display:block;width:56px;height:4px;border-radius:2px;background:var(--green);margin-top:14px}
+.fin h2:after{margin-left:auto;margin-right:auto}
+h3{font-weight:700;font-size:1.1rem;line-height:1.35}
+section{padding:80px 0}.wrap{padding:0 24px}
+p.lead{font-size:1.05rem;color:#4a3762;margin-bottom:8px}.hero p{font-size:1.1rem}
+.btn{font-family:Poppins,sans-serif;font-weight:600;font-size:.95rem;padding:14px 28px;border-radius:999px;letter-spacing:.01em}
+.pink{box-shadow:0 8px 20px rgba(243,21,115,.28)}.ghost{border-width:1.5px}
+#cd{font-family:Poppins,sans-serif;font-weight:500;font-size:.88rem}#cd b{font-weight:700;letter-spacing:.05em;border-radius:999px;padding:3px 12px}
+nav{box-shadow:0 2px 14px rgba(32,3,60,.06)}nav a.l{font-weight:500;color:var(--ink)}nav a.l:hover{color:var(--pink)}
+.hero{padding:96px 0 72px}.stat strong{font-weight:800;font-size:2.2rem}
+.grid{gap:24px;margin-top:36px;align-items:stretch}
+.card{border-radius:16px;padding:28px;border:1px solid var(--line);box-shadow:0 4px 18px rgba(32,3,60,.06);transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:0 12px 30px rgba(32,3,60,.12);transform:translateY(-3px)}
+.course{border-top:5px solid var(--green);gap:12px}.course .price{font-weight:800;font-size:1.7rem;margin-top:6px}
+.course .price small{font-weight:500;opacity:.7}.course .hr{font-weight:500}.course .btn{width:100%}
+.tog{border-width:1.5px;margin:20px 0 0}.tog button{font-family:Poppins,sans-serif;font-weight:600;padding:9px 22px}
+.tiers{gap:24px;margin-top:36px}.tier{border-radius:16px;padding:32px}.tier h3{margin-bottom:4px}.tier ul{padding:0;margin-top:14px}
+.bonus{gap:24px;margin-top:36px}.bonus .card{border-left:5px solid var(--green);border-top:1px solid var(--line)}.bonus h3{font-size:1rem}.bonus p{font-size:.92rem;color:#5b4a72}
+.pain{padding:0;margin:18px 0}.pain li{list-style:none;margin:0 0 12px;padding-left:30px;position:relative}.pain li:before{content:"✕";position:absolute;left:0;color:var(--pink);font-weight:700}
+.chk li{padding:9px 0 9px 32px;border-bottom:1px solid var(--line)}.chk li:last-child{border:0}
+details{border-radius:14px;margin:12px 0;padding:0 22px;box-shadow:0 2px 10px rgba(32,3,60,.04)}summary{font-family:Poppins,sans-serif;font-weight:600;font-size:1rem;padding:18px 0}
+#faq .wrap,#curriculum .wrap{max-width:860px}
+.fin{padding:88px 0}footer{padding:44px 0;line-height:1.9}
+#wa{font-family:Poppins,sans-serif;font-weight:600}
+#box{border-radius:20px;padding:32px}#box label{font-family:Poppins,sans-serif;font-weight:500}#box input,#box select{border-radius:10px;padding:12px}
+.tot{font-weight:800}.bank{border-radius:10px}
+@media(max-width:600px){section{padding:56px 0}.hero{padding:64px 0 48px}.card{padding:22px}}
+.old{text-decoration:line-through;opacity:.55;font-size:.95rem}.save{display:inline-block;background:var(--green);color:#fff;font-weight:600;font-size:.78rem;padding:3px 12px;border-radius:999px;margin-left:6px}#ann .price{margin-top:2px}</style></head><body>
 
-  <button id="install"><span>⬇️</span> Install app</button>
-  <div id="ios">📲 To install: tap <b>Share</b>, then <b>Add to Home Screen</b>.</div>
+<div id="cd" role="timer">Free bonuses if you enrol within <b id="t">72:00:00</b> of opening this page</div>
+<nav><div class="wrap"><a href="#top"><img alt="BaytulHub Online Academy" src="data:image/webp;base64,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"></a>
+<div><a class="l" href="#courses">Courses</a><a class="l" href="#annual">Annual plans</a><a class="l" href="#curriculum">Curriculum</a><a class="l" href="#faq">FAQ</a><button class="btn pink" style="padding:10px 18px;margin-left:18px" data-buy>Enrol now</button></div></div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+<h1>Pass WAEC, NECO and JAMB the first time.</h1>
+<p>Online lessons for SS1, SS2 and SS3 students, one-on-one or in small groups of up to 5. You choose the class days.</p>
+<div class="cta"><a class="btn pink" href="#courses">Choose a course</a><button class="btn ghost" data-buy="trial">Book a trial class</button></div>
+<div class="stat"><div><strong>62.96%</strong>of 2025 WASSCE candidates got 5 credits including English and Maths, down from 72.12% in 2024. Over a third missed it.</div>
+<div><strong>Maths + English</strong>are compulsory for every candidate, so they come first in our plan for each student.</div></div>
+</div></header>
+
+<section class="alt"><div class="wrap rv"><h2>Lessons cost money. The result should show it.</h2>
+<p class="lead">Parents often tell us the same things:</p>
+<ul class="pain lead"><li>Crowded lesson centres where your child is never asked a question.</li><li>Teachers who finish the syllabus but never practise past questions.</li><li>A JAMB score that looked fine in mock tests and dropped on the real CBT.</li><li>Theory papers where marks are lost on method, not on knowledge.</li></ul>
+<p class="lead">We start from real past questions. When your child gets one wrong, we go back and teach the topic behind it.</p></div></section>
+
+<section><div class="wrap rv"><h2>What the results show</h2>
+<div class="grid"><div class="card"><h3>WAEC 2025</h3><p>In the 2025 WASSCE, 62.96% of candidates got five credits including English and Maths, after WAEC revised its results. In 2024 the figure was 72.12%. Source: WAEC, reported by BusinessDay.</p></div>
+<div class="card"><h3>JAMB UTME</h3><p>The UTME is written on computer: 4 subjects, 180 questions, 2 hours, and a score out of 400. Courses like Medicine and Engineering ask for high scores, so every mark matters.</p></div>
+<div class="card"><h3>Why practice matters</h3><p>Students often know the topic but lose marks to the question style and the time limit. That is why most of our sessions work through past questions.</p></div></div></div></section>
+
+<section class="alt" id="courses"><div class="wrap"><h2>Choose a course</h2>
+<p class="lead">Cohorts: WAEC/NECO 2027 &amp; 2028, JAMB 2027 &amp; 2028. Prices are per month.</p>
+<p class="lead"><b>SS1 student?</b> Start now. A strong foundation in Maths, English and the sciences makes SS2 and SS3 far easier, and you reach your exam year with the hard topics already mastered.</p>
+<div class="tog" id="cur"><button class="on" data-c="NGN">₦ Naira</button><button data-c="USD">$ Dollar</button></div>
+<div class="grid" id="cards"></div></div></section>
+
+<section id="annual"><div class="wrap"><h2>Pay yearly and save 10%</h2><p class="lead">Pay for 12 months upfront on any course and get 10% off. Prices follow the currency you chose above.</p><div class="grid" id="ann"></div></div></section>
+
+<section class="alt"><div class="wrap rv"><h2>Pure Science Elite: 2 or 3 sessions a week</h2>
+<div class="tiers"><div class="tier"><h3>Steady (2 sessions/week)</h3><p class="mut">8 hours a month</p><ul><li>Physics, Chemistry, Further Maths, General Maths</li><li>Core calculations and equations</li><li>Weekly assessment-portal practice</li></ul></div>
+<div class="tier best"><h3>Intensive (3 sessions/week)</h3><p class="mut">12 hours a month, best for SS3 and resit candidates</p><ul><li>Everything in Steady</li><li>Extra hour a week on WAEC theory and alternative-to-practical questions</li><li>More past-question drills before exam season</li></ul></div></div></div></section>
+
+<section><div class="wrap rv"><h2>Free bonuses when you enrol within 72 hours</h2>
+<div class="bonus"><div class="card"><h3>Weekly practice on the assessment portal</h3><p>Timed CBT-style quizzes with instant scores.</p></div>
+<div class="card"><h3>Past-question PDFs</h3><p>Organised by topic, for your subjects.</p></div>
+<div class="card"><h3>Free mock CBT</h3><p>A full 2-hour mock that looks and works like the JAMB CBT.</p></div>
+<div class="card"><h3>Formula and theory sheets</h3><p>One-page revision sheets for each subject.</p></div>
+<div class="card"><h3>Monthly parent progress report</h3><p>Scores, weak topics and what we will fix next.</p></div>
+<div class="card"><h3>Class recordings</h3><p>Replay any lesson on Google Classroom.</p></div>
+<div class="card"><h3>Telegram doubt-solving</h3><p>Send a question between sessions and get an answer.</p></div>
+<div class="card"><h3>Study timetable</h3><p>A personal plan from now to exam day.</p></div></div></div></section>
+
+<section class="alt" id="curriculum"><div class="wrap"><h2>What each course covers</h2><div id="cur-acc"></div></div></section>
+
+<section><div class="wrap rv"><h2>What is included</h2>
+<ul class="chk lead"><li>One-on-one lessons, or small groups of up to 5</li><li>Zoom or Google Meet, on days you and your child choose</li><li>Google Classroom for notes and recordings, Telegram for quick questions</li><li>SS1 to SS3 students welcome, including SS1 foundation classes</li><li>Login to the BaytulHub student portal, where all class details live</li><li>Access to our Student Management System and Learning Management System</li><li>Trial class available before you commit</li></ul></div></section>
+
+<section class="alt"><div class="wrap rv"><h2>Our Student and Learning Management Systems</h2>
+<p class="lead">Every student is registered on BaytulHub's own Student Management System and Learning Management System, so parents can see the schedule, results and class materials in one place.</p>
+<div class="grid"><div class="card"><h3>Student Management System</h3><ul class="chk"><li>Student profile and enrolment record</li><li>Class schedule and attendance</li><li>Results and progress for parents</li><li>Payment records</li></ul></div>
+<div class="card"><h3>Learning Management System</h3><ul class="chk"><li>Notes, past-question PDFs and class recordings</li><li>Assignments and weekly practice</li><li>Quizzes and mock CBTs</li><li>Progress tracking for each course</li></ul></div></div></div></section>
+
+<section id="faq"><div class="wrap"><h2>Questions parents ask</h2>
+<details open><summary>What is the difference between 2 and 3 sessions a week?</summary><p>On Pure Science Elite, 2 sessions give 8 hours a month and 3 give 12. The 3-session plan adds extra theory and past-question drilling, and suits SS3 students close to their exam.</p></details>
+<details><summary>Is it one-on-one?</summary><p>Yes, one-on-one for now. Small groups are capped at 5 students.</p></details>
+<details><summary>Which days and times?</summary><p>You and your child decide. We fit sessions around school.</p></details>
+<details><summary>Which platform do you use?</summary><p>Zoom or Google Meet for lessons, Google Classroom for notes, Telegram for quick questions.</p></details>
+<details><summary>Can we try before paying for a month?</summary><p>Yes. A trial class costs <span data-trial>₦10,000</span>.</p></details>
+<details><summary>What is your refund policy?</summary><p>Money is refunded on reasonable conditions. Message us on WhatsApp before you pay and we will explain them.</p></details>
+<details><summary>Is there a discount for paying yearly?</summary><p>Yes. Pay 12 months upfront on any course and you get 10% off, which means you pay for 10.8 months instead of 12.</p></details>
+<details><summary>Can SS1 students join?</summary><p>Yes. SS1 lessons focus on building strong foundations in Maths, English and the sciences, so your child is ready for the WAEC, NECO and JAMB syllabus in SS2 and SS3.</p></details>
+<details><summary>What are your Student and Learning Management Systems?</summary><p>They are BaytulHub's own portals. The Student Management System holds your child's record, schedule and progress. The Learning Management System holds notes, recordings, assignments and quizzes.</p></details>
+<details><summary>How do I pay?</summary><p>Choose a course, pay by bank transfer to the account shown, then submit your payment reference. We confirm it and email your student portal login.</p></details>
+<details><summary>Which exam years do you cover?</summary><p>WAEC/NECO 2027 and 2028, and JAMB 2027 and 2028.</p></details>
+</div></section>
+
+<section class="fin"><div class="wrap"><h2>Ready to start?</h2><p>Book a trial class first, or enrol now and get the free bonuses before your timer ends.</p>
+<button class="btn pink" data-buy>Enrol now</button></div></section>
+
+<footer><div class="wrap"><b style="color:#fff">BaytulHub Online Academy</b> | Knowledge / Character / Service<br>
+<a href="mailto:abeebullah25@gmail.com">abeebullah25@gmail.com</a> | WhatsApp 07011976869</div></footer>
+<a id="wa" href="https://wa.me/2347011976869?text=Hello%20BaytulHub%2C%20I%27d%20like%20to%20ask%20about%20your%20courses" target="_blank" rel="noopener">WhatsApp us</a>
+
+<div id="ov"><div id="box"><button class="x" aria-label="Close" id="close">×</button>
+<h3>Enrol with BaytulHub</h3>
+<label>Course<select id="course"></select></label>
+<label>Currency<select id="ccy"><option value="NGN">Naira (₦)</option><option value="USD">Dollar ($)</option></select></label>
+<p class="tot" id="tot"></p>
+<div class="bank" id="bank"></div>
+<form id="f">
+<label>Parent or student name<input name="name" required></label>
+<label>Email<input name="email" type="email" required></label>
+<label>WhatsApp number<input name="whatsapp" required></label>
+<label>Class<select name="cls"><option>SS1</option><option>SS2</option><option>SS3</option><option>GCE / resit</option></select></label>
+<label>Exam and year<select name="exam"><option>WAEC/NECO 2027</option><option>WAEC/NECO 2028</option><option>JAMB 2027</option><option>JAMB 2028</option><option>WAEC/NECO/JAMB 2029 (SS1 foundation)</option></select></label>
+<label>Subjects (JAMB pack: your 4 subjects)<input name="notes"></label>
+<label>Payment reference or sender name<input name="ref" required></label>
+<label>Receipt screenshot (optional, max 3 MB)<input name="file" type="file" accept="image/*,.pdf"></label>
+<button class="btn pink" style="width:100%;margin-top:16px" id="go">I have paid, submit</button><p id="msg" role="status"></p></form></div></div>
 
 <script>
-  /* ====== 1) YOUR APP LINK — replace with your current Apps Script /exec URL ====== */
-  var APP_URL = "https://script.google.com/macros/s/AKfycbza5risT6OCsq2X_E-NMN4hFU2VerswBYQ3OK1FAe89EMCHfJJSSYZUrHDhBjOjFn_zrg/exec"; // PASTE_YOUR_EXEC_URL_HERE
-
-  var frame = document.getElementById('app');
-  var splash = document.getElementById('splash');
-  frame.src = APP_URL;
-  frame.addEventListener('load', function(){ setTimeout(function(){ splash.classList.add('hide'); }, 400); });
-  setTimeout(function(){ splash.classList.add('hide'); }, 6000); // safety: hide splash even if load event is missed
-
-  /* ====== 2) Service worker (makes it installable) ====== */
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function(){ navigator.serviceWorker.register('service-worker.js').catch(function(){}); });
-  }
-
-  /* ====== 3) Android install button ====== */
-  var deferred = null;
-  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferred = e; document.getElementById('install').style.display = 'inline-flex'; });
-  document.getElementById('install').addEventListener('click', function(){ if(!deferred) return; deferred.prompt(); deferred.userChoice.finally(function(){ deferred = null; document.getElementById('install').style.display='none'; }); });
-  window.addEventListener('appinstalled', function(){ document.getElementById('install').style.display='none'; });
-
-  /* ====== 4) iPhone hint (Safari has no install button) ====== */
-  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-  if (isIOS && !standalone) { setTimeout(function(){ document.getElementById('ios').style.display='block'; setTimeout(function(){ var el=document.getElementById('ios'); if(el) el.style.display='none'; }, 8000); }, 1500); }
-</script>
-</body>
-</html>
+const APPS_URL="https://baytulhub.com/lms-western";
+const C=[
+{id:"pure2",n:"Pure Science Elite, 2 sessions/week",ex:"WAEC, GCE, NECO, JAMB",s:"Physics, Chemistry, Further Maths, General Maths",h:8,p:{NGN:120000,USD:240}},
+{id:"pure3",n:"Pure Science Elite, 3 sessions/week",ex:"WAEC, GCE, NECO, JAMB",s:"Physics, Chemistry, Further Maths, General Maths",h:12,p:{NGN:180000,USD:360}},
+{id:"core",n:"The Core Compulsory Duo",ex:"WAEC, GCE, NECO, JAMB",s:"Mathematics and English Language",h:8,p:{NGN:100000,USD:200}},
+{id:"jamb",n:"JAMB CBT Speed & Accuracy Pack",ex:"JAMB (UTME) only",s:"Any 4 subjects you choose",h:12,p:{NGN:96000,USD:270}},
+{id:"comm",n:"The Global Communicator Bundle",ex:"WAEC Oral/Essay, JAMB English, Post-UTME",s:"English Language and Communication Skills",h:8,p:{NGN:80000,USD:240}}];
+const TRIAL={id:"trial",n:"Trial class",p:{NGN:10000,USD:7}};
+const A=C.map(c=>({id:c.id+"y",n:c.n,base:c,p:{NGN:Math.round(c.p.NGN*108)/10,USD:Math.round(c.p.USD*108)/10}}));
+const ALL=[TRIAL,...C,...A.map(a=>({...a,n:a.n+" (annual, 10% off)"}))];
+const CUR={
+pure2:["Physics: measurements, motion, Newton's laws, work, energy and power, heat, waves, light, electricity, magnetism, atomic physics","Chemistry: atomic structure, bonding, mole concept, acids, bases and salts, redox, electrolysis, rates, organic chemistry","Further Maths: vectors, calculus, matrices, probability, statistics, binomial theorem, mechanics","General Maths: number bases, indices and logs, algebra, sets, geometry, trigonometry, statistics","Alternative-to-practical questions and WAEC theory answer techniques"],
+pure3:["Everything in the 2-session plan","An extra weekly hour on WAEC theory, calculations and alternative-to-practical questions","More past-question drills as the exam gets closer"],
+core:["Mathematics: algebra, number work, geometry and geometric proofs, trigonometry, statistics, probability","English: lexis and structure, comprehension, summary writing","Essay writing: letters, articles, speeches, narrative and argumentative essays"],
+jamb:["Past questions from 1978 to date in your 4 chosen subjects","How to eliminate wrong options quickly","Time management for the 2-hour CBT","Practice on the CBT software layout, with full mock tests"],
+comm:["Oral English: vowels, consonants, stress, intonation, rhymes","WAEC Test of Oral practice","Composition and essay writing for WAEC and Post-UTME","Public speaking and presentation confidence"]};
+const BANK={NGN:[["Account name","Abeebullah Abdulwahab"],["Bank","Opay"],["Account number","7011976869"]],
+USD:[["Account name","Abeebullah Abdulwahab"],["Bank","Lead Bank"],["Account number","216319499271"],["Routing number","101019644"],["Account type","Personal Checking"],["Bank address","9450 Southwest Gemini Drive, Beaverton, OR, 97008, USA"]]};
+const $=s=>document.querySelector(s),sym={NGN:"₦",USD:"$"};let cur="NGN";
+const fm=(v,c)=>sym[c]+v.toLocaleString("en-US");
+function draw(){
+ $("#cards").innerHTML=C.map(c=>`<div class="card course rv in"><h3>${c.n}</h3><span class="mut">${c.ex}</span><span>${c.s}</span>
+ <div class="price">${fm(c.p[cur],cur)}<small style="font:600 .9rem Poppins"> / month</small></div>
+ <div class="hr">${fm(Math.round(c.p[cur]/c.h*100)/100,cur)} per hour, ${c.h} hours a month</div>
+ <button class="btn pink" data-buy="${c.id}">Enrol in this course</button></div>`).join("");
+ $("#ann").innerHTML=A.map(a=>{const m=a.base.p[cur]*12;return `<div class="card course rv in"><h3>${a.n}</h3><span class="mut">${a.base.s}</span>
+ <div><span class="old">${fm(m,cur)}</span> <span class="save">Save ${fm(m-a.p[cur],cur)}</span></div>
+ <div class="price">${fm(a.p[cur],cur)}<small style="font:500 .9rem Poppins"> / year</small></div>
+ <div class="hr">12 months for the price of 10.8, ${a.base.h} hours a month</div>
+ <button class="btn pink" data-buy="${a.id}">Pay yearly</button></div>`}).join("");
+ document.querySelectorAll("[data-trial]").forEach(e=>e.textContent=fm(10000,"NGN")+" ("+fm(7,"USD")+")");
+ hook()}
+document.querySelectorAll("#cur button").forEach(b=>b.onclick=()=>{cur=b.dataset.c;document.querySelectorAll("#cur button").forEach(x=>x.classList.toggle("on",x==b));draw()});
+$("#cur-acc").innerHTML=C.map(c=>`<details><summary>${c.n}</summary><ul>${CUR[c.id].map(x=>`<li>${x}</li>`).join("")}</ul></details>`).join("");
+function hook(){document.querySelectorAll("[data-buy]").forEach(b=>b.onclick=()=>open(b.dataset.buy))}
+function opts(){$("#course").innerHTML=ALL.map(c=>`<option value="${c.id}">${c.n}</option>`).join("")}
+function upd(){const c=ALL.find(x=>x.id==$("#course").value),k=$("#ccy").value;
+ $("#tot").textContent="Amount to pay: "+fm(c.p[k],k);
+ $("#bank").innerHTML="<b>Pay by bank transfer to:</b>"+BANK[k].map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join("")}
+function open(id){opts();$("#course").value=id&&id!=""&&ALL.some(x=>x.id==id)?id:"pure2";$("#ccy").value=cur;upd();$("#ov").classList.add("on")}
+$("#course").onchange=$("#ccy").onchange=upd;$("#close").onclick=()=>$("#ov").classList.remove("on");
+$("#f").onsubmit=async e=>{e.preventDefault();const f=e.target,m=$("#msg"),b=$("#go");
+ const fd=Object.fromEntries(new FormData(f));const file=f.file.files[0];delete fd.file;
+ fd.course=$("#course").value;fd.currency=$("#ccy").value;
+ if(file){if(file.size>3e6){m.textContent="Receipt is larger than 3 MB. Attach a smaller file or skip it.";return}
+  fd.receipt=await new Promise(r=>{const x=new FileReader;x.onload=()=>r({name:file.name,type:file.type,data:x.result.split(",")[1]});x.readAsDataURL(file)})}
+ b.disabled=true;m.textContent="Submitting";
+ try{const r=await fetch(APPS_URL,{method:"POST",body:JSON.stringify(fd)});const j=await r.json();
+  m.style.color=j.ok?"#2f7a14":"#b00020";m.textContent=j.ok?"Received. Check your email for reference "+j.ref+". We will confirm your payment shortly.":(j.error||"Something went wrong.");if(j.ok)f.reset()}
+ catch(_){m.style.color="#b00020";m.textContent="We could not reach the server. Message us on WhatsApp with your receipt."}
+ b.disabled=false};
+/* per-visitor 72h countdown */
+let end;try{end=+localStorage.getItem("bh_end")}catch(_){}
+if(!end){end=Date.now()+72*3600*1000;try{localStorage.setItem("bh_end",end)}catch(_){}}
+const p=n=>String(n).padStart(2,"0");
+setInterval(function tick(){const d=end-Date.now();if(d<=0){$("#cd").textContent="Your 72-hour bonus window has ended. Message us on WhatsApp to ask about current bonuses.";return}
+ $("#t").textContent=p(Math.floor(d/36e5))+":"+p(Math.floor(d/6e4)%60)+":"+p(Math.floor(d/1e3)%60);return tick}(),1000);
+const io=new IntersectionObserver(a=>a.forEach(x=>x.isIntersecting&&x.target.classList.add("in")),{threshold:.12});
+document.querySelectorAll(".rv").forEach(e=>io.observe(e));
+opts();draw();
+</script></body></html>

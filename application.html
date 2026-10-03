@@ -139,6 +139,8 @@
   .countdown{margin:0 0 18px; padding:12px 14px; border-radius:12px; background:var(--olive-tint); border:1px solid var(--line);}
   .countdown.is-closed{background:var(--gray-tint); border-color:var(--gray-line);}
   .cd-label{display:block; font-size:0.72rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;}
+  .cd-date{display:block; font-size:0.85rem; font-weight:600; color:var(--olive); margin:-4px 0 10px;}
+  .countdown.is-closed .cd-date{color:var(--gray-text);}
   .cd-units{display:flex; gap:8px;}
   .cd-unit{flex:1; text-align:center; background:#fff; border-radius:8px; padding:6px 4px; border:1px solid var(--line);}
   .cd-unit b{display:block; font-size:1.05rem; color:var(--olive); line-height:1.2;}
@@ -652,8 +654,11 @@
     var box = document.createElement('div');
     box.className = 'countdown' + (isOpen ? '' : ' is-closed');
     box.setAttribute('role', 'timer');
+    var dStr = card.getAttribute('data-date') || DEFAULT_DATE;
+    var pretty = new Date(dStr + 'T12:00:00+01:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Africa/Lagos' });
     box.innerHTML =
       '<span class="cd-label">' + (isOpen ? 'Closes in' : 'Opens in') + '</span>' +
+      '<span class="cd-date">' + (isOpen ? 'Closes on ' : 'Opens on ') + pretty + '</span>' +
       '<div class="cd-units">' +
         '<div class="cd-unit"><b data-u="d">0</b><small>Days</small></div>' +
         '<div class="cd-unit"><b data-u="h">0</b><small>Hours</small></div>' +

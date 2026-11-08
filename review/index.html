@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BaytulHub Online Academy Student Portal</title>
+<link rel="icon" href="BH_logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { navy: '#20033C', brand: '#6AB547', pink: '#F31573' },
+    fontFamily: { sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'] }
+  } }
+};
+</script>
+<style>
+  body { font-family: 'Poppins', sans-serif; background: #F6F3FA; }
+  .field { width: 100%; border: 1px solid #d9d1e3; border-radius: 0.75rem; padding: 0.7rem 0.9rem; background: #fff; font-size: 0.9rem; outline: none; transition: border-color .15s, box-shadow .15s; }
+  .field:focus { border-color: #6AB547; box-shadow: 0 0 0 3px rgba(106,181,71,.2); }
+  .label { display: block; font-size: 0.75rem; font-weight: 600; color: #20033C; margin-bottom: 0.3rem; letter-spacing: .02em; }
+  .tab-btn { padding: 0.8rem 1.25rem; font-weight: 600; font-size: 0.9rem; border-bottom: 3px solid transparent; color: #6b5a80; }
+  .tab-btn.active { color: #20033C; border-color: #F31573; }
+  .spinner { width: 18px; height: 18px; border: 3px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .logo-circle { border-radius: 9999px; overflow: hidden; background: #fff; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+  .logo-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+</style>
+</head>
+<body class="min-h-screen text-slate-800">
+
+<header class="bg-navy text-white border-b-4 border-brand">
+  <div class="max-w-5xl mx-auto px-4 py-5 flex items-center gap-4">
+    <div class="logo-circle w-16 h-16 shrink-0"><img src="BH_logo.webp" alt="BaytulHub logo"></div>
+    <div class="logo-circle w-16 h-16 shrink-0"><img src="Hirthlogo.webp" alt="Al Hirth Institute logo"></div>
+    <div class="min-w-0">
+      <h1 class="text-lg sm:text-2xl font-bold leading-tight">BaytulHub Online Academy</h1>
+      <p class="text-brand text-xs sm:text-sm font-medium">Knowledge &bull; Character &bull; Service</p>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 py-8">
+  <div class="bg-white rounded-2xl shadow-sm border border-purple-100">
+    <div class="flex border-b border-purple-100 overflow-x-auto" role="tablist">
+      <button id="tabPaymentBtn" class="tab-btn active whitespace-nowrap" role="tab">Monthly Renewal Payments</button>
+      <button id="tabReviewBtn" class="tab-btn whitespace-nowrap" role="tab">Peer Review Submission</button>
+    </div>
+
+    <!-- PAYMENT TAB -->
+    <section id="tabPayment" class="p-5 sm:p-8">
+      <div class="grid lg:grid-cols-5 gap-8">
+        <form id="paymentForm" class="lg:col-span-3 space-y-4" novalidate>
+          <div>
+            <h2 class="text-xl font-bold text-navy">Monthly Renewal Payment</h2>
+            <p class="text-sm text-slate-500 mt-1">Pay into the academy account shown, then upload your proof of payment below.</p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div><label class="label" for="pName">Full name</label><input id="pName" class="field" type="text" autocomplete="name" required></div>
+            <div><label class="label" for="pStudentId">Student ID</label><input id="pStudentId" class="field" type="text" placeholder="BH-48-33" required></div>
+            <div><label class="label" for="pEmail">Email address</label><input id="pEmail" class="field" type="email" autocomplete="email" required></div>
+            <div><label class="label" for="pPhone">Phone number</label><input id="pPhone" class="field" type="tel" autocomplete="tel" required></div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div><label class="label" for="pProgram">Program</label>
+              <select id="pProgram" class="field" required><option value="">Select your program</option></select></div>
+            <div><label class="label" for="pLevel">Class or level</label><input id="pLevel" class="field" type="text" placeholder="Beginner Level 1" required></div>
+          </div>
+          <div id="hoursWrap" class="hidden">
+            <label class="label" for="pHours">Number of hours for this payment</label>
+            <input id="pHours" class="field" type="number" min="1" step="1" value="1">
+          </div>
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div><label class="label" for="pFor">Payment for</label>
+              <select id="pFor" class="field"><option>Monthly fee</option><option>Tuition</option><option>Exam fee</option><option>Other</option></select></div>
+            <div><label class="label" for="pMonth">Month</label><select id="pMonth" class="field"></select></div>
+            <div><label class="label" for="pYear">Year</label><select id="pYear" class="field"></select></div>
+          </div>
+          <div>
+            <span class="label">Payment method</span>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="flex items-center gap-2 border border-purple-200 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:border-brand has-[:checked]:bg-green-50">
+                <input type="radio" name="pMethod" value="Naira Transfer" checked class="accent-green-600"><span class="text-sm font-medium">Naira transfer</span></label>
+              <label class="flex items-center gap-2 border border-purple-200 rounded-xl px-4 py-3 cursor-pointer has-[:checked]:border-brand has-[:checked]:bg-green-50">
+                <input type="radio" name="pMethod" value="Dollar Transfer" class="accent-green-600"><span class="text-sm font-medium">Dollar transfer</span></label>
+            </div>
+          </div>
+          <div>
+            <label class="label" for="pFile">Payment receipt (image or PDF, maximum 5MB)</label>
+            <input id="pFile" class="field" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required>
+            <p id="pFileInfo" class="text-xs text-slate-500 mt-1"></p>
+          </div>
+          <button id="pSubmit" type="submit" class="w-full bg-pink hover:opacity-90 text-white font-semibold rounded-xl py-3 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed transition">
+            <span class="spinner hidden"></span><span class="btn-text">Submit payment</span>
+          </button>
+        </form>
+
+        <aside class="lg:col-span-2 space-y-4">
+          <div class="rounded-2xl bg-navy text-white p-5">
+            <p class="text-xs uppercase tracking-wider text-brand font-semibold">Total due</p>
+            <p id="totalMain" class="text-3xl font-bold mt-1">&#8358;0</p>
+            <p id="totalAlt" class="text-sm text-purple-200 mt-1">$0.00</p>
+            <p id="totalNote" class="text-xs text-purple-200 mt-3">Select a program to see the amount.</p>
+          </div>
+          <div class="rounded-2xl border border-purple-100 bg-[#F6F3FA] p-5">
+            <h3 id="bankTitle" class="text-sm font-bold text-navy mb-3 border-l-4 border-pink pl-2">Bank transfer details</h3>
+            <dl id="bankList" class="space-y-2 text-sm"></dl>
+          </div>
+          <div class="rounded-2xl border border-purple-100 p-5 text-sm text-slate-600 space-y-2">
+            <p>Fees are paid in advance. Payment is due by the 27th, and late payment is accepted until the 5th of the following month.</p>
+            <p>Need help? WhatsApp <span class="font-semibold text-navy">08155531567</span> or email <span class="font-semibold text-navy">baytulhubclerk@gmail.com</span>.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- REVIEW TAB -->
+    <section id="tabReview" class="p-5 sm:p-8 hidden">
+      <form id="reviewForm" class="max-w-3xl space-y-4" novalidate>
+        <div>
+          <h2 class="text-xl font-bold text-navy">Peer Review Submission</h2>
+          <p class="text-sm text-slate-500 mt-1">Meet your review partner, go over the two weeks together, and record what you discussed.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="label" for="rName">Your full name</label><input id="rName" class="field" type="text" required></div>
+          <div><label class="label" for="rStudentId">Your student ID</label><input id="rStudentId" class="field" type="text" required></div>
+          <div class="sm:col-span-2"><label class="label" for="rEmail">Your email address</label><input id="rEmail" class="field" type="email" required></div>
+          <div><label class="label" for="rPartner">Review partner full name</label><input id="rPartner" class="field" type="text" required></div>
+          <div><label class="label" for="rPartnerId">Review partner student ID</label><input id="rPartnerId" class="field" type="text" required></div>
+          <div class="sm:col-span-2"><label class="label" for="rProgram">Program</label>
+            <select id="rProgram" class="field" required><option value="">Select your program</option></select></div>
+          <div><label class="label" for="rStart">Review period starts</label><input id="rStart" class="field" type="date" required></div>
+          <div><label class="label" for="rEnd">Review period ends</label><input id="rEnd" class="field" type="date" required></div>
+        </div>
+        <div><label class="label" for="rLessons">Lessons covered</label><textarea id="rLessons" rows="3" class="field" required></textarea></div>
+        <div><label class="label" for="rHifdh">Hifdh progress</label><textarea id="rHifdh" rows="3" class="field" placeholder="Surahs, ayat and revision done" required></textarea></div>
+        <div><label class="label" for="rAssign">Assignments</label><textarea id="rAssign" rows="3" class="field" required></textarea></div>
+        <div><label class="label" for="rNotes">Points discussed during the review</label><textarea id="rNotes" rows="3" class="field" required></textarea></div>
+        <div>
+          <label class="label" for="rFile">Review document (PDF or DOCX, maximum 10MB)</label>
+          <input id="rFile" class="field" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
+          <p id="rFileInfo" class="text-xs text-slate-500 mt-1"></p>
+        </div>
+        <button id="rSubmit" type="submit" class="w-full bg-pink hover:opacity-90 text-white font-semibold rounded-xl py-3 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed transition">
+          <span class="spinner hidden"></span><span class="btn-text">Submit peer review</span>
+        </button>
+      </form>
+    </section>
+  </div>
+</main>
+
+<footer class="text-center text-xs text-slate-500 pb-8 px-4">
+  <p>BaytulHub Online Academy &bull; Reg. No. RC 7066784</p>
+  <p class="mt-1">Prepared by BaytulHub Resources Development Team</p>
+</footer>
+
+<!-- RESULT MODAL -->
+<div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-navy/70 p-4">
+  <div class="bg-white rounded-2xl max-w-md w-full p-7 text-center shadow-2xl">
+    <div id="modalIcon" class="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4"></div>
+    <h3 id="modalTitle" class="text-xl font-bold text-navy"></h3>
+    <p id="modalMsg" class="text-sm text-slate-600 mt-2 whitespace-pre-line"></p>
+    <button id="modalClose" class="mt-6 bg-navy text-white font-semibold rounded-xl px-8 py-2.5 hover:opacity-90">Close</button>
+  </div>
+</div>
+
+<script>
+/* ===================== CONFIGURATION ===================== */
+const CONFIG = {
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyV1kvsUPGpRno2OepdcmT41hwK1mcZDV00msSqp724FwmKSCO26FUhwK2kv4aARx6O/exec',
+  NAIRA_PER_DOLLAR_BASE_NGN: 40000,   // 40,000 naira
+  NAIRA_PER_DOLLAR_BASE_USD: 55,      // equals 55 dollars
+  PAYMENT_MAX_BYTES: 5 * 1024 * 1024,
+  REVIEW_MAX_BYTES: 10 * 1024 * 1024,
+  PAYMENT_TYPES: ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'],
+  REVIEW_TYPES: ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+  REVIEW_EXTENSIONS: ['pdf', 'docx']
+};
+
+const PROGRAMS = [
+  { id: 'ahlul-quran', name: 'Ahlul Quran Hafiz Bundle', price: 30000, hourly: false },
+  { id: 'zayd', name: 'Zayd ibn Thabit Young Huffaz Pack', price: 40000, hourly: false },
+  { id: 'ibn-masud', name: "Ibn Mas'ud Academy", price: 40000, hourly: false },
+  { id: 'umm-sulaym', name: 'Umm Sulaym Home Academy', price: 40000, hourly: false },
+  { id: 'sahibul-quran', name: 'Sahibul Quran Legacy Pack', price: 10000, hourly: false },
+  { id: 'rabbi-zidni', name: 'Rabbi Zidni Ilma Elite Class (per hour)', price: 5000, hourly: true }
+];
+
+const BANKS = {
+  'Naira Transfer': {
+    title: 'Naira account',
+    rows: [['Account name', 'Abeebullah Abdulwahab'], ['Bank', 'Opay'], ['Account number', '7011976869']]
+  },
+  'Dollar Transfer': {
+    title: 'Dollar account',
+    rows: [['Account name', 'Abeebullah Abdulwahab'], ['Bank', 'Lead Bank'], ['Account number', '216319499271'],
+           ['Routing number', '101019644'], ['Account type', 'Personal Checking'],
+           ['Bank address', '9450 Southwest Gemini Drive, Beaverton, OR, 97008, USA']]
+  }
+};
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+/* ===================== HELPERS ===================== */
+const $ = (id) => document.getElementById(id);
+const nairaToUsd = (ngn) => Math.round((ngn * CONFIG.NAIRA_PER_DOLLAR_BASE_USD / CONFIG.NAIRA_PER_DOLLAR_BASE_NGN) * 100) / 100;
+const fmtNgn = (n) => '\u20A6' + Number(n).toLocaleString('en-NG');
+const fmtUsd = (n) => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+const selectedMethod = () => document.querySelector('input[name="pMethod"]:checked').value;
+
+function populatePrograms(selectEl) {
+  PROGRAMS.forEach((p) => {
+    const o = document.createElement('option');
+    o.value = p.id; o.textContent = p.name;
+    selectEl.appendChild(o);
+  });
+}
+
+/* ===================== DATE ENGINE ===================== */
+let monthOptions = [];
+function initDates() {
+  const now = new Date();
+  const cur = { y: now.getFullYear(), m: now.getMonth() };
+  const prev = cur.m === 0 ? { y: cur.y - 1, m: 11 } : { y: cur.y, m: cur.m - 1 };
+  monthOptions = [cur, prev];
+  const monthSel = $('pMonth');
+  monthSel.innerHTML = '';
+  monthOptions.forEach((o, i) => {
+    const opt = document.createElement('option');
+    opt.value = String(i);
+    opt.textContent = MONTHS[o.m] + (i === 0 ? ' (current)' : ' (previous)');
+    monthSel.appendChild(opt);
+  });
+  const yearSel = $('pYear');
+  yearSel.innerHTML = '';
+  [...new Set(monthOptions.map((o) => o.y))].forEach((y) => {
+    const opt = document.createElement('option');
+    opt.value = String(y); opt.textContent = String(y);
+    yearSel.appendChild(opt);
+  });
+  syncYear();
+}
+function syncYear() {
+  const o = monthOptions[Number($('pMonth').value)];
+  $('pYear').value = String(o.y);
+}
+
+/* ===================== PRICING ENGINE ===================== */
+function currentProgram() { return PROGRAMS.find((p) => p.id === $('pProgram').value) || null; }
+function computeTotalNgn() {
+  const p = currentProgram();
+  if (!p) return 0;
+  if (p.hourly) {
+    const h = parseInt($('pHours').value, 10);
+    return Number.isFinite(h) && h > 0 ? h * p.price : 0;
+  }
+  return p.price;
+}
+function updateTotal() {
+  const p = currentProgram();
+  $('hoursWrap').classList.toggle('hidden', !(p && p.hourly));
+  const ngn = computeTotalNgn();
+  const usd = nairaToUsd(ngn);
+  const isUsd = selectedMethod() === 'Dollar Transfer';
+  $('totalMain').textContent = isUsd ? fmtUsd(usd) : fmtNgn(ngn);
+  $('totalAlt').textContent = isUsd ? 'Equivalent to ' + fmtNgn(ngn) : 'Equivalent to ' + fmtUsd(usd);
+  $('totalNote').textContent = !p ? 'Select a program to see the amount.'
+    : p.hourly ? fmtNgn(p.price) + ' per hour, for ' + (parseInt($('pHours').value, 10) || 0) + ' hour(s). Rate may be adjusted by the academy.'
+    : 'Monthly fee for ' + p.name + '. Any approved discount is applied by the academy after confirmation.';
+}
+function renderBank() {
+  const b = BANKS[selectedMethod()];
+  $('bankTitle').textContent = b.title;
+  $('bankList').innerHTML = '';
+  b.rows.forEach(([k, v]) => {
+    const row = document.createElement('div');
+    row.className = 'flex justify-between gap-4';
+    const dt = document.createElement('dt'); dt.className = 'text-slate-500 text-xs uppercase tracking-wide pt-0.5'; dt.textContent = k;
+    const dd = document.createElement('dd'); dd.className = 'font-semibold text-navy text-right'; dd.textContent = v;
+    row.append(dt, dd);
+    $('bankList').appendChild(row);
+  });
+}
+
+/* ===================== FILES ===================== */
+function validateFile(file, allowedTypes, allowedExt, maxBytes) {
+  if (!file) return 'Please choose a file to upload.';
+  const ext = (file.name.split('.').pop() || '').toLowerCase();
+  const typeOk = allowedTypes.includes(file.type) || (allowedExt && allowedExt.includes(ext) && (!file.type || file.type === ''));
+  const extOk = allowedExt ? allowedExt.includes(ext) : true;
+  if (!typeOk || !extOk) return 'This file type is not allowed.';
+  if (file.size > maxBytes) return 'The file is too large. The maximum size is ' + (maxBytes / 1048576) + 'MB.';
+  if (file.size === 0) return 'The selected file is empty.';
+  return '';
+}
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result || '');
+      const idx = result.indexOf(',');
+      if (idx === -1) { reject(new Error('The file could not be read.')); return; }
+      resolve(result.slice(idx + 1));
+    };
+    reader.onerror = () => reject(new Error('The file could not be read.'));
+    reader.onabort = () => reject(new Error('File reading was cancelled.'));
+    reader.readAsDataURL(file);
+  });
+}
+function mimeFor(file) {
+  if (file.type) return file.type;
+  const ext = (file.name.split('.').pop() || '').toLowerCase();
+  if (ext === 'pdf') return 'application/pdf';
+  if (ext === 'docx') return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+  return 'application/octet-stream';
+}
+
+/* ===================== UI STATES ===================== */
+function setLoading(btn, loading, idleText) {
+  btn.disabled = loading;
+  btn.querySelector('.spinner').classList.toggle('hidden', !loading);
+  btn.querySelector('.btn-text').textContent = loading ? 'Uploading, please wait' : idleText;
+}
+function showModal(ok, title, message) {
+  $('modalIcon').className = 'mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 ' + (ok ? 'bg-green-100 text-green-600' : 'bg-pink/10 text-pink');
+  $('modalIcon').innerHTML = ok
+    ? '<svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+    : '<svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>';
+  $('modalTitle').textContent = title;
+  $('modalMsg').textContent = message;
+  $('modal').classList.remove('hidden');
+  $('modal').classList.add('flex');
+}
+function hideModal() { $('modal').classList.add('hidden'); $('modal').classList.remove('flex'); }
+
+async function postToServer(payload) {
+  if (!CONFIG.SCRIPT_URL || CONFIG.SCRIPT_URL.indexOf('PASTE_') === 0) {
+    throw new Error('The portal is not connected yet. Please contact the academy.');
+  }
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 120000);
+  try {
+    const res = await fetch(CONFIG.SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+      redirect: 'follow',
+      signal: controller.signal
+    });
+    if (!res.ok) throw new Error('The server returned an error (' + res.status + ').');
+    const text = await res.text();
+    let data;
+    try { data = JSON.parse(text); } catch (e) { throw new Error('The server sent an unexpected response.'); }
+    if (!data.success) throw new Error(data.message || 'The submission was not accepted.');
+    return data;
+  } catch (err) {
+    if (err.name === 'AbortError') throw new Error('The request took too long. Please check your connection and try again.');
+    if (err instanceof TypeError) throw new Error('Network problem. Please check your connection and try again.');
+    throw err;
+  } finally { clearTimeout(timer); }
+}
+
+/* ===================== SUBMIT: PAYMENT ===================== */
+async function handlePayment(e) {
+  e.preventDefault();
+  const btn = $('pSubmit');
+  const p = currentProgram();
+  const v = {
+    name: $('pName').value.trim(), studentId: $('pStudentId').value.trim(), email: $('pEmail').value.trim(),
+    phone: $('pPhone').value.trim(), level: $('pLevel').value.trim()
+  };
+  if (!v.name || !v.studentId || !v.email || !v.phone || !v.level) return showModal(false, 'Missing details', 'Please fill in every field before submitting.');
+  if (!isEmail(v.email)) return showModal(false, 'Check your email', 'Please enter a valid email address.');
+  if (!/^[0-9+\s()-]{7,20}$/.test(v.phone)) return showModal(false, 'Check your phone number', 'Please enter a valid phone number.');
+  if (!p) return showModal(false, 'Choose a program', 'Please select your program.');
+  let hours = 0;
+  if (p.hourly) {
+    hours = parseInt($('pHours').value, 10);
+    if (!Number.isFinite(hours) || hours < 1 || hours > 200) return showModal(false, 'Check the hours', 'Enter a whole number of hours between 1 and 200.');
+  }
+  const file = $('pFile').files[0];
+  const fileError = validateFile(file, CONFIG.PAYMENT_TYPES, ['jpg', 'jpeg', 'png', 'webp', 'pdf'], CONFIG.PAYMENT_MAX_BYTES);
+  if (fileError) return showModal(false, 'Receipt problem', fileError);
+
+  setLoading(btn, true, 'Submit payment');
+  try {
+    const month = monthOptions[Number($('pMonth').value)];
+    const ngn = computeTotalNgn();
+    const data = await readFileAsBase64(file);
+    const result = await postToServer({
+      type: 'payment',
+      studentName: v.name, studentId: v.studentId, email: v.email, phone: v.phone,
+      programId: p.id, program: p.name, level: v.level, paymentFor: $('pFor').value,
+      billingMonth: MONTHS[month.m], billingYear: month.y, hours: hours,
+      paymentMethod: selectedMethod(), amountNgn: ngn, amountUsd: nairaToUsd(ngn),
+      file: { name: file.name, mimeType: mimeFor(file), data: data }
+    });
+    showModal(true, 'Payment submitted', result.message || 'Your payment receipt was received. You will get a confirmation email once the academy confirms it.');
+    $('paymentForm').reset();
+    $('pFileInfo').textContent = '';
+    initDates(); updateTotal(); renderBank();
+  } catch (err) {
+    showModal(false, 'Submission failed', err.message);
+  } finally { setLoading(btn, false, 'Submit payment'); }
+}
+
+/* ===================== SUBMIT: PEER REVIEW ===================== */
+async function handleReview(e) {
+  e.preventDefault();
+  const btn = $('rSubmit');
+  const v = {
+    name: $('rName').value.trim(), studentId: $('rStudentId').value.trim(), email: $('rEmail').value.trim(),
+    partner: $('rPartner').value.trim(), partnerId: $('rPartnerId').value.trim(), programId: $('rProgram').value,
+    start: $('rStart').value, end: $('rEnd').value, lessons: $('rLessons').value.trim(), hifdh: $('rHifdh').value.trim(),
+    assignments: $('rAssign').value.trim(), notes: $('rNotes').value.trim()
+  };
+  if (Object.values(v).some((x) => !x)) return showModal(false, 'Missing details', 'Please fill in every field before submitting.');
+  if (!isEmail(v.email)) return showModal(false, 'Check your email', 'Please enter a valid email address.');
+  if (v.end < v.start) return showModal(false, 'Check the dates', 'The review period cannot end before it starts.');
+  if (v.studentId.toLowerCase() === v.partnerId.toLowerCase()) return showModal(false, 'Check the IDs', 'Your review partner must be a different student.');
+  const file = $('rFile').files[0];
+  const fileError = validateFile(file, CONFIG.REVIEW_TYPES, CONFIG.REVIEW_EXTENSIONS, CONFIG.REVIEW_MAX_BYTES);
+  if (fileError) return showModal(false, 'Document problem', fileError);
+
+  setLoading(btn, true, 'Submit peer review');
+  try {
+    const prog = PROGRAMS.find((p) => p.id === v.programId);
+    const data = await readFileAsBase64(file);
+    const result = await postToServer({
+      type: 'review',
+      reviewerName: v.name, reviewerId: v.studentId, reviewerEmail: v.email,
+      partnerName: v.partner, partnerId: v.partnerId, program: prog ? prog.name : v.programId,
+      periodStart: v.start, periodEnd: v.end, lessons: v.lessons, hifdh: v.hifdh,
+      assignments: v.assignments, notes: v.notes,
+      file: { name: file.name, mimeType: mimeFor(file), data: data }
+    });
+    showModal(true, 'Peer review submitted', result.message || 'Your peer review was received. You will get an email when it has been graded.');
+    $('reviewForm').reset();
+    $('rFileInfo').textContent = '';
+  } catch (err) {
+    showModal(false, 'Submission failed', err.message);
+  } finally { setLoading(btn, false, 'Submit peer review'); }
+}
+
+/* ===================== INIT ===================== */
+function showTab(which) {
+  const pay = which === 'payment';
+  $('tabPayment').classList.toggle('hidden', !pay);
+  $('tabReview').classList.toggle('hidden', pay);
+  $('tabPaymentBtn').classList.toggle('active', pay);
+  $('tabReviewBtn').classList.toggle('active', !pay);
+}
+function fileHint(inputId, infoId, types, ext, max) {
+  $(inputId).addEventListener('change', () => {
+    const f = $(inputId).files[0];
+    if (!f) { $(infoId).textContent = ''; return; }
+    const err = validateFile(f, types, ext, max);
+    $(infoId).textContent = err ? err : f.name + ' (' + (f.size / 1048576).toFixed(2) + 'MB)';
+    $(infoId).className = 'text-xs mt-1 ' + (err ? 'text-pink font-medium' : 'text-slate-500');
+    if (err) $(inputId).value = '';
+  });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  populatePrograms($('pProgram'));
+  populatePrograms($('rProgram'));
+  initDates(); renderBank(); updateTotal();
+  $('pMonth').addEventListener('change', syncYear);
+  $('pYear').addEventListener('change', syncYear);
+  $('pProgram').addEventListener('change', updateTotal);
+  $('pHours').addEventListener('input', updateTotal);
+  document.querySelectorAll('input[name="pMethod"]').forEach((r) => r.addEventListener('change', () => { renderBank(); updateTotal(); }));
+  $('tabPaymentBtn').addEventListener('click', () => showTab('payment'));
+  $('tabReviewBtn').addEventListener('click', () => showTab('review'));
+  $('paymentForm').addEventListener('submit', handlePayment);
+  $('reviewForm').addEventListener('submit', handleReview);
+  $('modalClose').addEventListener('click', hideModal);
+  $('modal').addEventListener('click', (ev) => { if (ev.target === $('modal')) hideModal(); });
+  fileHint('pFile', 'pFileInfo', CONFIG.PAYMENT_TYPES, ['jpg', 'jpeg', 'png', 'webp', 'pdf'], CONFIG.PAYMENT_MAX_BYTES);
+  fileHint('rFile', 'rFileInfo', CONFIG.REVIEW_TYPES, CONFIG.REVIEW_EXTENSIONS, CONFIG.REVIEW_MAX_BYTES);
+});
+</script>
+</body>
+</html>
